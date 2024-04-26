@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main">
+        <button id="add-button">Add a book</button>
+        <dialog>
+            <button autofocus id="close-button">Close</button>
+            <form action="" id="book-details-form">
+                <fieldset>
+                    <legend>Enter the book details</legend>
+                    <div id="form-field">
+                        <label for="book-name">Title :
+                            <input type="text" id="book-title">
+                        </label>
+                        <label for="book-name">Author :
+                            <input type="text" id="book-author">
+                        </label>
+                        <label for="book-name">Number Of Pages :
+                            <input type="text" id="page-count">
+                        </label>
+                        <label for="book-name">Have You Read It? :
+                            <input type="text" id="is-read">
+                        </label>
+                    </div>
+                    <input type="button" id="submit-button" value="Submit">
+    
+                </fieldset>
+                
+            </form>
+        </dialog>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
