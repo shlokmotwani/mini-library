@@ -49,3 +49,15 @@ label{
     border: 2px solid gray;
     border-radius: 6px;
 }
+
+dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+dialog>button#close-button{
+    position: absolute;
+    right: 0;
+}
