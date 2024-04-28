@@ -20,10 +20,13 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-function setUpForm() {
+function loadAllCards(){
   for (let i = 0; i < myLibrary.length; i++) {
     loadCard(myLibrary[i]);
   }
+}
+
+function setUpForm() {
 
   const dialog = document.querySelector("dialog");
   const closeButton = document.querySelector("#close-button");
@@ -95,6 +98,23 @@ function loadCard(book) {
   bookIsRead.textContent = "Has been read? : " + book.isRead;
   bookCard.appendChild(bookIsRead);
 
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+
+  deleteButton.addEventListener("click", ()=>{
+    const i = myLibrary.findIndex(function(element){
+      return element === book;
+    });
+    myLibrary.splice(i, 1);
+    for(let i=0; i<myLibrary.length; i++){
+      console.log(myLibrary[i].getDetails());
+    }
+    bookGrid.innerHTML = "";
+    loadAllCards();
+  });
+
+  bookCard.appendChild(deleteButton);
+
   bookGrid.appendChild(bookCard);
   bookGrid.style.cssText = `
       width: 100vw;
@@ -106,4 +126,13 @@ function loadCard(book) {
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(4, 1fr);`;
 }
+
+
+// myLibrary.push(new Book("Hatyaara", "SMP", 600, "Yes"));
+// myLibrary.push(new Book("Bichauliya", "SMP", 110, "No"));
+// myLibrary.push(new Book("The 5Am Club", "Robin Sharma", 600, "Yes"));
+// myLibrary.push(new Book("Courage is calling", "Ryan holiday", 600, "Yes"));
+// myLibrary.push(new Book("The Alchemist", "Paulo Coelho", 600, "No"));
+// myLibrary.push(new Book("The Krishna Key", "SMPAshwin Sanghi", 1200, "Yes"));
+
 setUpForm();
