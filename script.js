@@ -27,6 +27,9 @@ function loadAllCards() {
   for (let i = 0; i < myLibrary.length; i++) {
     loadCard(myLibrary[i]);
   }
+  if(myLibrary.length == 0){
+    bookGrid.style.cssText = `display: none;`;
+  }
 }
 
 /* 
