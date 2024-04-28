@@ -42,6 +42,7 @@ fieldset{
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin: 30px;
 }
 
 label{
@@ -69,4 +70,8 @@ dialog{
 dialog>button#close-button{
     position: absolute;
     right: 0;
+}
+
+#checkbox-div{
+    display: flex;
 }

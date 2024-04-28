@@ -48,7 +48,8 @@ function setUpForm() {
     let bookTitle = bookInput.value;
     let bookAuthor = authorInput.value;
     let pageCount = pageCountInput.value;
-    let isRead = isReadInput.value;
+    let isRead = isReadInput.checked;
+    console.log(isRead);
 
     const book = new Book(bookTitle, bookAuthor, pageCount, isRead);
     addBookToLibrary(book);
@@ -57,7 +58,7 @@ function setUpForm() {
     bookInput.value = "";
     authorInput.value = "";
     pageCountInput.value = "";
-    isReadInput.value = "";
+    isReadInput.checked = false;
 
     console.log(myLibrary);
     dialog.close();
@@ -102,9 +103,36 @@ function loadCard(book) {
   const bookPageCount = document.createElement("p");
   bookPageCount.textContent = book.pageCount + " pages";
   bookCard.appendChild(bookPageCount);
-  const bookIsRead = document.createElement("p");
-  bookIsRead.textContent = "Has been read? : " + book.isRead;
-  bookCard.appendChild(bookIsRead);
+
+  const isReadDiv = document.createElement("div");
+  isReadDiv.style.cssText = `
+  display: flex;`;
+
+  const bookIsReadLabel = document.createElement("label");
+  bookIsReadLabel.textContent = "Has been read? : ";
+  const bookIsRead = document.createElement("input");
+  bookIsRead.setAttribute("type", "checkbox");
+
+  if (book.isRead) {
+    bookIsRead.checked = true;
+  } else {
+    bookIsRead.checked = false;
+  }
+
+  bookIsRead.addEventListener("change", () => {
+    const i = myLibrary.findIndex(function (element) {
+      return element === book;
+    });
+    if (bookIsRead.checked) {
+      myLibrary[i].isRead = true;
+    } else {
+      myLibrary[i].isRead = false;
+    }
+  });
+
+  isReadDiv.appendChild(bookIsReadLabel);
+  isReadDiv.appendChild(bookIsRead);
+  bookCard.appendChild(isReadDiv);
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
