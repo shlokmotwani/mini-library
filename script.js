@@ -1,12 +1,7 @@
 const myLibrary = [];
 const addABookButton = document.querySelector("#add-button");
 const bookGrid = document.querySelector("#book-grid");
-bookGrid.style.cssText = `
-width: 100vw;
-background-color: rgba(3, 252, 173, 0.3);
-display: grid;
-grid-auto-flow: row;
-grid-template-columns: repeat(5, 1fr);`;
+bookGrid.style.cssText = `display: none;`;
 
 function Book(title, author, pageCount, isRead) {
   // the constructor...
@@ -26,7 +21,7 @@ function addBookToLibrary(book) {
 }
 
 function setUpForm() {
-  for(let i=0; i<myLibrary.length; i++){
+  for (let i = 0; i < myLibrary.length; i++) {
     loadCard(myLibrary[i]);
   }
 
@@ -69,37 +64,46 @@ function setUpForm() {
   });
 }
 
-function loadCard(book){
-  
-    const bookCard = document.createElement("div");
-    bookCard.style.cssText = `
+function loadCard(book) {
+  const bookCard = document.createElement("div");
+  bookCard.style.cssText = `
     border: 2px solid black;
+    box-shadow: 10px 10px 16px 0 rgba(0,0,0,0.9);
+    background-color: rgb(228, 197, 158);
     border-radius: 8px;
-    color: white;
+    color: rgb(128, 61, 59);
+    font-weight: 800;
     font-size: 1.2rem;
-    width: 180px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 20px;
-    align-items: center;`;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+    text-align: center;
+    margin: 20px;`;
 
-    const bookTitle = document.createElement("p");
-    bookTitle.textContent = book.title;
-    bookCard.appendChild(bookTitle);
-    const bookAuthor = document.createElement("p");
-    bookAuthor.textContent = book.author;
-    bookCard.appendChild(bookAuthor);
-    const bookPageCount = document.createElement("p");
-    bookPageCount.textContent = book.pageCount;
-    bookCard.appendChild(bookPageCount);
-    const bookIsRead = document.createElement("p");
-    bookIsRead.textContent = book.isRead;
-    bookCard.appendChild(bookIsRead);
+  const bookTitle = document.createElement("p");
+  bookTitle.textContent = "Title: " + book.title;
+  bookCard.appendChild(bookTitle);
+  const bookAuthor = document.createElement("p");
+  bookAuthor.textContent = "By: " + book.author;
+  bookCard.appendChild(bookAuthor);
+  const bookPageCount = document.createElement("p");
+  bookPageCount.textContent = book.pageCount + " pages";
+  bookCard.appendChild(bookPageCount);
+  const bookIsRead = document.createElement("p");
+  bookIsRead.textContent = "Has been read? : " + book.isRead;
+  bookCard.appendChild(bookIsRead);
 
-    bookGrid.appendChild(bookCard);
+  bookGrid.appendChild(bookCard);
+  bookGrid.style.cssText = `
+      width: 100vw;
+      height: 100%;
+      background-color: rgb(50, 44, 43);
+      color: rgb(228, 197, 158);
+      display: grid;
+      grid-auto-flow: row;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);`;
 }
-
-// myLibrary.push(new Book("The 5AM Club", "Robin Sharma", 600, "Yes"));
-// myLibrary.push(new Book("Jaadugarni", "Surendra Mohan Pathak", 240, "No"));
 setUpForm();
