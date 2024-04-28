@@ -3,6 +3,7 @@ const addABookButton = document.querySelector("#add-button");
 const bookGrid = document.querySelector("#book-grid");
 bookGrid.style.cssText = `display: none;`;
 
+//create a book object
 function Book(title, author, pageCount, isRead) {
   // the constructor...
   this.title = title;
@@ -15,19 +16,25 @@ function Book(title, author, pageCount, isRead) {
   };
 }
 
+//push a book object in myLibrary array
 function addBookToLibrary(book) {
   // do stuff here
   myLibrary.push(book);
 }
 
-function loadAllCards(){
+//makes cards of each book object and display it on the book grid
+function loadAllCards() {
   for (let i = 0; i < myLibrary.length; i++) {
     loadCard(myLibrary[i]);
   }
 }
 
+/* 
+    sets up a form to enter book details (to make a card of it)
+    submit button makes a book object and stores it in myLibrary array
+    a new card of the book object is generated (fn: loadCard() ) and displayed
+*/
 function setUpForm() {
-
   const dialog = document.querySelector("dialog");
   const closeButton = document.querySelector("#close-button");
 
@@ -67,6 +74,7 @@ function setUpForm() {
   });
 }
 
+//creates a new book card and appends it in the card grid
 function loadCard(book) {
   const bookCard = document.createElement("div");
   bookCard.style.cssText = `
@@ -101,12 +109,15 @@ function loadCard(book) {
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
 
-  deleteButton.addEventListener("click", ()=>{
-    const i = myLibrary.findIndex(function(element){
+  /* deletes the book object from myLibrary array
+    clears the card grid and recreates cards of all book objects in myLibrary array  
+  */
+  deleteButton.addEventListener("click", () => {
+    const i = myLibrary.findIndex(function (element) {
       return element === book;
     });
     myLibrary.splice(i, 1);
-    for(let i=0; i<myLibrary.length; i++){
+    for (let i = 0; i < myLibrary.length; i++) {
       console.log(myLibrary[i].getDetails());
     }
     bookGrid.innerHTML = "";
@@ -126,13 +137,5 @@ function loadCard(book) {
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(4, 1fr);`;
 }
-
-
-// myLibrary.push(new Book("Hatyaara", "SMP", 600, "Yes"));
-// myLibrary.push(new Book("Bichauliya", "SMP", 110, "No"));
-// myLibrary.push(new Book("The 5Am Club", "Robin Sharma", 600, "Yes"));
-// myLibrary.push(new Book("Courage is calling", "Ryan holiday", 600, "Yes"));
-// myLibrary.push(new Book("The Alchemist", "Paulo Coelho", 600, "No"));
-// myLibrary.push(new Book("The Krishna Key", "SMPAshwin Sanghi", 1200, "Yes"));
 
 setUpForm();
